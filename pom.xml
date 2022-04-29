@@ -45,8 +45,6 @@
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <jaxb.version>2.3.0</jaxb.version>
         <awaitility.version>3.1.6</awaitility.version>
-        <docker.image.prefix>beerworks</docker.image.prefix>
-        <docker.image.name>${project.artifactId}</docker.image.name>
     </properties>
 
     <dependencyManagement>
@@ -207,41 +205,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.33.0</version>
-                <configuration>
-                    <verbose>true</verbose>
-                    <images>
-                        <image>
-                            <name>${docker.image.prefix}/${docker.image.name}</name>
-                            <alias>${project.artifactId}</alias>
-                            <build>
-                                <contextDir>${basedir}/src/main/docker</contextDir>
-                                <dockerFile>Dockerfile</dockerFile>
-                                <assembly>
-                                    <descriptorRef>artifact</descriptorRef>
-                                </assembly>
-                                <tags>
-                                    <tag>latest</tag>
-                                    <tag>${project.version}</tag>
-                                </tags>
-                            </build>
-                        </image>
-                    </images>
-                </configuration>
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>default</id>-->
-<!--                        <phase>install</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>build</goal>-->
-<!--                            <goal>push</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
             </plugin>
         </plugins>
     </build>
